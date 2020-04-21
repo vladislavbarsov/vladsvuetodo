@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Header/>
+    <div class="container">
+        <Header :noteCount="notes.length"/>
         <NewTodo/>
         <Grid/>
         <Footer/>
@@ -14,6 +14,13 @@
     import Footer from '@/components/AppFooter.vue'
 
     export default {
+        data(){
+            return {
+                notes: [
+                    'Sample Note'
+                ]
+            }
+        },
         components: {
             Header,
             NewTodo,
