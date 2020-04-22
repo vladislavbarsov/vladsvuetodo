@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="text-center">
     <h1>Vue Notes</h1>
-    <p>Your Current Note count is - {{ noteCount }}</p>
+    <p>Your Current To-do count is - {{ todoCount }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['noteCount']
+  props: ['todoCount']
 }
 </script>
 

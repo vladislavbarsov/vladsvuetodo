@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <Header :noteCount="notes.length"/>
-        <NewTodo/>
-        <Grid/>
+        <Header :todoCount="todos.length"/>
+        <NewTodo @addTodo="addTodo"/>
+        <Grid :allTodos="todos"/>
         <Footer/>
     </div>
 </template>
@@ -16,8 +16,8 @@
     export default {
         data(){
             return {
-                notes: [
-                    'Sample Note'
+                todos: [
+                    'Sample To-do'
                 ]
             }
         },
@@ -26,10 +26,15 @@
             NewTodo,
             Grid,
             Footer
+        },
+        methods:{
+            addTodo(todo){
+                this.todos.push(todo);
+            }
         }
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
 </style>
