@@ -1,11 +1,13 @@
-<template lang="html">
-  <div class="row">
-    <div class="form-group">
-      <label>Enter To-do</label>
-      <textarea class="form-control" rows="5" v-model="todo"></textarea>
+<template class="row">
+  
+    <div>
+      <div class="form-group">
+        <label>Enter To-do</label>
+        <textarea class="form-control" rows="5" v-model="todo"></textarea>
+      </div>
+      <button @click.prevent="createNew" class="btn btn-success">Create New Note</button>
     </div>
-    <button @click.prevent="createNew" class="btn btn-success">Create New Note</button>
-  </div>
+  
 </template>
 
 <script>
@@ -27,5 +29,7 @@
 <style lang="css" scoped>
   button {
     font-size: 1.2em;
+    margin-bottom: 16px;
+    width: 100%
   }
 </style>

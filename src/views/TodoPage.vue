@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <Header :todoCount="todos.length"/>
-        <NewTodo @addTodo="addTodo"/>
-        <Grid :allTodos="todos"/>
+        <Header :todoCount="todos.length"/> <hr>
+        <NewTodo @addTodo="addTodo"/> <hr>
+        <Grid :allTodos="todos"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -36,5 +36,7 @@
 </script>
 
 <style lang="css" scoped>
-
+    .container {
+        max-width: 800px;
+    }
 </style>
