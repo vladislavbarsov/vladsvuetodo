@@ -1,26 +1,34 @@
 <template>
-    <div>
-        <p>You'r active To-do's : </p>
-        <TodoView v-for="todo in allTodos"
-                    :key="todo"
-                    >{{ todo }} </TodoView>
+    <div class="card">
+
+        <ul class="list-group list-group-flush">
+            <li class="note list-group-item" 
+                v-for="todo in allTodos" 
+                :key="todo">
+                {{ todo }}
+            </li>
+        </ul>
                     
     </div>
 </template>
 
 <script>
-    import TodoView from '@/components/AppView.vue'
     
     export default {
         props: [
             'allTodos'
-        ],
-        components:{
-            TodoView
-        }
+        ]
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+    .note {
+        cursor: pointer;
+    }
+    .note:hover {
+        background-color: #d6f7c3;
+    }
+    li {
+        font-style: italic;
+    }
 </style>

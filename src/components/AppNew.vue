@@ -1,5 +1,4 @@
 <template class="row">
-  
     <div>
       <div class="form-group">
         <label>Enter To-do</label>
@@ -7,7 +6,6 @@
       </div>
       <button @click.prevent="createNew" class="btn btn-success">Create New Note</button>
     </div>
-  
 </template>
 
 <script>
