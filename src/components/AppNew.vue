@@ -26,7 +26,7 @@
         methods: {
             createNew(){
                 this.$emit('addTodo', this.todo);
-                this.note = '';
+                this.todo = '';
             },
             saveChanges(){
               this.todoToEdit.todoTxt = this.todo;
