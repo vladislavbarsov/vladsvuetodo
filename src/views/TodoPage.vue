@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <Header :todoCount="todos.length"/> <hr>
-        <NewTodo @addTodo="addTodo"/> <hr>
+        <NewTodo @addTodo="addTodo"
+                @todoEdited="saveChanges"/> <hr>
         <Grid :allTodos="todos"/> <hr>
         <Footer/>
     </div>
@@ -30,6 +31,9 @@
         methods:{
             addTodo(todo){
                 this.todos.push(todo);
+            },
+            saveChanges(todoToEdit){
+                this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
             }
         }
     }
