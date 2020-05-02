@@ -4,7 +4,9 @@
             <li class="note list-group-item" 
                 v-for="(todo, index) in allTodos" 
                 :key="todo"
-                @click.prevent="selectTodo(todo, index)">
+                @click.prevent="selectTodo(todo, index)"
+                v-long-press="300"
+                @long-press-start="deleteTodo(index)">
                 {{ todo }}
             </li>
         </ul>            
@@ -13,6 +15,7 @@
 
 <script>
     import {editTodo} from '@/main.js'
+    import LongPress from 'vue-directive-long-press'
     export default {
         props: [
             'allTodos'
@@ -27,7 +30,13 @@
                 this.selectedTodo.todoId = index;
                 this.selectedTodo.todoTxt = todo;
                 editTodo.$emit('selectedTodo', this.selectedTodo);
+            },
+            deleteTodo(index){
+                this.$emit('deleteTodo', index);
             }
+        },
+        directives: {
+            'long-press': LongPress
         }
     }
 </script>

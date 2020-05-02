@@ -3,7 +3,8 @@
         <Header :todoCount="todos.length"/> <hr>
         <NewTodo @addTodo="addTodo"
                 @todoEdited="saveChanges"/> <hr>
-        <Grid :allTodos="todos"/> <hr>
+        <Grid :allTodos="todos"
+                @deleteTodo="deleteTodo"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -34,6 +35,9 @@
             },
             saveChanges(todoToEdit){
                 this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
+            },
+            deleteTodo(index){
+                this.todos.splice(index, 1);
             }
         }
     }
