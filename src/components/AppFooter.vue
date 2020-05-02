@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Footer
+    <div class="card-footer text-muted fixed-bottom">
+        All rights reserved &copy;
     </div>
 </template>
 
