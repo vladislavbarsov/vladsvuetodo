@@ -1,15 +1,17 @@
 <template>
     <div class="card">
-        <ul class="list-group list-group-flush">
-            <li class="note list-group-item" 
-                v-for="(todo, index) in allTodos" 
-                :key="todo"
-                @click.prevent="selectTodo(todo, index)"
-                v-long-press="300"
-                @long-press-start="deleteTodo(index)">
-                {{ todo }}
-            </li>
-        </ul>            
+            <ul class="list-group list-group-flush">
+                <transition-group tag="span" name="animation">
+                    <li class="note list-group-item animation-item" 
+                        v-for="(todo, index) in allTodos" 
+                        :key="todo"
+                        @click.prevent="selectTodo(todo, index)"
+                        v-long-press="300"
+                        @long-press-start="deleteTodo(index)">
+                        {{ todo }}
+                    </li>
+                </transition-group>
+            </ul>            
     </div>
 </template>
 
@@ -51,5 +53,14 @@
     li {
         font-style: italic;
     }
-    
+    .animation-item {
+        transition: all .2s;
+    }
+    .animation-enter, .animation-leave-to {
+        opacity: 0;
+        transform: translateY(400px)
+    }
+    .animation-leave-active {
+        position: absolute;
+    }
 </style>
