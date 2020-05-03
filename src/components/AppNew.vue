@@ -25,7 +25,11 @@
         },
         methods: {
             createNew(){
-                this.$emit('addTodo', this.todo);
+                if(this.todo == ''){
+                  alert("Please enter a todo")
+                } else {
+                  this.$emit('addTodo', this.todo);
+                }
                 this.todo = '';
             },
             saveChanges(){
