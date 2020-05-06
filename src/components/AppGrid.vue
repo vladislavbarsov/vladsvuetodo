@@ -1,17 +1,22 @@
 <template>
-    <div class="card">
+    <div>
+        <div>
+            <h4>Active To-do's</h4>
+        </div>
+        <div class="card">
             <ul class="list-group list-group-flush">
                 <transition-group tag="span" name="animation">
-                    <li class="note list-group-item animation-item" 
+                    <li class="note list-group-item animation-item list-group-item-success" 
                         v-for="(todo, index) in allTodos" 
                         :key="todo"
                         @click.prevent="selectTodo(todo, index)"
                         v-long-press="300"
-                        @long-press-start="deleteTodo(index)">
+                        @long-press-start="completeTodo(todo, index)">
                         {{ todo }}
                     </li>
                 </transition-group>
             </ul>            
+    </div>
     </div>
 </template>
 
@@ -24,7 +29,8 @@
         ],
         data(){
             return {
-                selectedTodo: {}
+                selectedTodo: {},
+                completedTodo: {}
             }
         },
         methods: {
@@ -33,8 +39,10 @@
                 this.selectedTodo.todoTxt = todo;
                 editTodo.$emit('selectedTodo', this.selectedTodo);
             },
-            deleteTodo(index){
-                this.$emit('deleteTodo', index);
+            completeTodo(todo, index){
+                this.completedTodo.todoId = index;
+                this.completedTodo.todoTxt = todo;
+                this.$emit('completeTodo', this.completedTodo);
             }
         },
         directives: {
@@ -58,7 +66,7 @@
     }
     .animation-enter, .animation-leave-to {
         opacity: 0;
-        transform: translateY(400px)
+        transform: translateY(100px)
     }
     .animation-leave-active {
         position: absolute;
