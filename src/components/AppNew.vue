@@ -1,7 +1,7 @@
 <template class="row">
     <div>
       <div class="form-group">
-        <label>Enter To-do</label>
+        <h4>Enter New To-do</h4>
         <textarea class="form-control" rows="5" v-model="todo"></textarea>
       </div>
       <button @click.prevent="createNew" 

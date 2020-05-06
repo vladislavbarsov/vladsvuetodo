@@ -1,8 +1,12 @@
 <template>
-    <div class="card">
+    <div>
+        <div>
+            <h4>Active To-do's</h4>
+        </div>
+        <div class="card">
             <ul class="list-group list-group-flush">
                 <transition-group tag="span" name="animation">
-                    <li class="note list-group-item animation-item" 
+                    <li class="note list-group-item animation-item list-group-item-success" 
                         v-for="(todo, index) in allTodos" 
                         :key="todo"
                         @click.prevent="selectTodo(todo, index)"
@@ -12,6 +16,7 @@
                     </li>
                 </transition-group>
             </ul>            
+    </div>
     </div>
 </template>
 

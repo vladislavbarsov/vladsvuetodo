@@ -5,6 +5,7 @@
                 @todoEdited="saveChanges"/> <hr>
         <Grid :allTodos="todos"
                 @deleteTodo="deleteTodo"/> <hr>
+        <ListComplete :allCompleted="completed"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -13,6 +14,7 @@
     import Header from '@/components/AppHeader.vue'
     import NewTodo from '@/components/AppNew.vue'
     import Grid from '@/components/AppGrid.vue'
+    import ListComplete from '@/components/AppListCompleted.vue'
     import Footer from '@/components/AppFooter.vue'
 
     export default {
@@ -20,6 +22,9 @@
             return {
                 todos: [
                     'Sample To-do'
+                ],
+                completed: [
+                    'Completed Todo'
                 ]
             }
         },
@@ -27,6 +32,7 @@
             Header,
             NewTodo,
             Grid,
+            ListComplete,
             Footer
         },
         methods:{
