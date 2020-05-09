@@ -18,6 +18,7 @@
     import ListComplete from '@/components/AppListCompleted.vue'
     import Footer from '@/components/AppFooter.vue'
 
+
     export default {
         data(){
             return {
