@@ -5,7 +5,8 @@
                 @todoEdited="saveChanges"/> <hr>
         <Grid :allTodos="todos"
                 @completeTodo="completeTodo"/> <hr>
-        <ListComplete :allCompleted="completedTodos"/> <hr>
+        <ListComplete :allCompleted="completedTodos"
+                @restoreTodo="restoreTodo"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -37,7 +38,7 @@
         },
         methods:{
             addTodo(todo){
-                this.todos.push(todo);
+                this.todos.unshift(todo);
             },
             saveChanges(todoToEdit){
                 this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
@@ -45,6 +46,9 @@
             completeTodo(completedTodo){
                 this.todos.splice(completedTodo.todoId, 1);
                 this.completedTodos.unshift(completedTodo.todoTxt);
+            },
+            restoreTodo(todoToRestore){
+                this.todos.unshift(todoToRestore);
             }
         }
     }

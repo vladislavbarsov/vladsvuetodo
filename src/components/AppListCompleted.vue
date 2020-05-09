@@ -30,8 +30,8 @@
         },
         methods:{
             restoreTodo(todo){
-                console.log(todo);
-                
+                //console.log(todo);
+                this.$emit('restoreTodo', todo)
             }
         }
     }

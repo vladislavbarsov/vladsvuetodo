@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="text-center">
-    <h1>Vue Notes</h1>
+    <h1>Vue To-do's</h1>
     <p>Your Current To-do count is - {{ todoCount }}</p>
   </div>
 </template>
