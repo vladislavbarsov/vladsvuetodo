@@ -1,7 +1,8 @@
 <template class="row">
     <div>
       <div class="form-group">
-        <label>Enter To-do</label>
+        <label v-if="!editMode">Enter To-do</label>
+        <label v-else>Edit To-do</label>
         <textarea class="form-control" rows="5" v-model="todo"></textarea>
       </div>
       <button @click.prevent="createNew" 
