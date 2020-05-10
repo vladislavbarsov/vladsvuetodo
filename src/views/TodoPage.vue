@@ -48,8 +48,9 @@
                 this.todos.splice(completedTodo.todoId, 1);
                 this.completedTodos.unshift(completedTodo.todoTxt);
             },
-            restoreTodo(todoToRestore){
-                this.todos.unshift(todoToRestore);
+            restoreTodo(restoredTodo){
+                this.completedTodos.splice(restoredTodo.todoId, 1);
+                this.todos.unshift(restoredTodo.todoTxt);
             }
         }
     }
