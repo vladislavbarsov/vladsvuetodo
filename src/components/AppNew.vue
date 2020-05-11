@@ -1,12 +1,13 @@
 <template class="row">
     <div>
       <div class="form-group">
-        <h4>Enter New To-do</h4>
+        <label v-if="!this.$store.state.editMode">Enter To-do</label>
+        <label v-else>Edit To-do</label>
         <textarea class="form-control" rows="5" v-model="todo"></textarea>
       </div>
       <button @click.prevent="createNew" 
               class="btn btn-success"
-              v-if="!editMode">Create New Note</button>
+              v-if="!this.$store.state.editMode">Create New Note</button>
       <button @click.prevent="saveChanges" 
               class="btn btn-primary"
               v-else>Save Changes</button>
@@ -19,8 +20,7 @@
         data(){
             return {
                 todo: '',
-                todoToEdit: {},
-                editMode: false
+                todoToEdit: {}
             }
         },
         methods: {
@@ -36,15 +36,18 @@
               this.todoToEdit.todoTxt = this.todo;
               this.$emit('todoEdited', this.todoToEdit);
               this.todoToEdit = {};
-              this.editMode = false;
+              this.$store.state.editMode = false;
               this.todo = "";
+              console.log(this.$store.state.editMode);
+              
             }
         },
         created(){
           editTodo.$on('selectedTodo', (todoObj)=>{
             this.todoToEdit = todoObj;
             this.todo = todoObj.todoTxt;
-            this.editMode = true;
+            console.log("created hook");
+            this.$store.state.editMode = true;
           })
         }
     }

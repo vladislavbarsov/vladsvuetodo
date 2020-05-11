@@ -4,8 +4,9 @@
         <NewTodo @addTodo="addTodo"
                 @todoEdited="saveChanges"/> <hr>
         <Grid :allTodos="todos"
-                @deleteTodo="deleteTodo"/> <hr>
-        <ListComplete :allCompleted="completed"/> <hr>
+                @completeTodo="completeTodo"/> <hr>
+        <ListComplete :allCompleted="completedTodos"
+                @restoreTodo="restoreTodo"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -17,14 +18,15 @@
     import ListComplete from '@/components/AppListCompleted.vue'
     import Footer from '@/components/AppFooter.vue'
 
+
     export default {
         data(){
             return {
                 todos: [
                     'Sample To-do'
                 ],
-                completed: [
-                    'Completed Todo'
+                completedTodos: [
+                    'Completed To-do'
                 ]
             }
         },
@@ -37,13 +39,18 @@
         },
         methods:{
             addTodo(todo){
-                this.todos.push(todo);
+                this.todos.unshift(todo);
             },
             saveChanges(todoToEdit){
                 this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
             },
-            deleteTodo(index){
-                this.todos.splice(index, 1);
+            completeTodo(completedTodo){
+                this.todos.splice(completedTodo.todoId, 1);
+                this.completedTodos.unshift(completedTodo.todoTxt);
+            },
+            restoreTodo(restoredTodo){
+                this.completedTodos.splice(restoredTodo.todoId, 1);
+                this.todos.unshift(restoredTodo.todoTxt);
             }
         }
     }

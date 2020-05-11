@@ -7,10 +7,10 @@
             <ul class="list-group list-group-flush">
                 <transition-group tag="span" name="animation">
                     <li class="note list-group-item animation-item list-group-item-light"
-                        v-for="todo in allCompleted"
+                        v-for="(todo, index) in allCompleted"
                         :key="todo"
                         v-long-press="300"
-                        @long-press-start="restoreTodo(todo)"
+                        @long-press-start="restoreTodo(todo, index)"
                         >{{ todo }}</li>
                 </transition-group>
 
@@ -22,6 +22,11 @@
 <script>
     import LongPress from 'vue-directive-long-press'
     export default {
+        data(){
+            return {
+                restoredTodo: {}
+            }
+        },
         props: [
             'allCompleted'
         ],
@@ -29,9 +34,15 @@
             'long-press': LongPress
         },
         methods:{
-            restoreTodo(todo){
-                console.log(todo);
-                
+            restoreTodo(todo, index){
+                console.log(this.$store.state.editMode);
+                if(!this.$store.state.editMode){
+                    this.restoredTodo.todoId = index;
+                    this.restoredTodo.todoTxt = todo;
+                    this.$emit('restoreTodo', this.restoredTodo);
+                } else {
+                    alert("Please Save Changes Before Doing That");
+                }
             }
         }
     }

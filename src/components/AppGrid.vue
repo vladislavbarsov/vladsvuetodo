@@ -11,7 +11,7 @@
                         :key="todo"
                         @click.prevent="selectTodo(todo, index)"
                         v-long-press="300"
-                        @long-press-start="deleteTodo(index)">
+                        @long-press-start="completeTodo(todo, index)">
                         {{ todo }}
                     </li>
                 </transition-group>
@@ -29,7 +29,8 @@
         ],
         data(){
             return {
-                selectedTodo: {}
+                selectedTodo: {},
+                completedTodo: {}
             }
         },
         methods: {
@@ -38,8 +39,16 @@
                 this.selectedTodo.todoTxt = todo;
                 editTodo.$emit('selectedTodo', this.selectedTodo);
             },
-            deleteTodo(index){
-                this.$emit('deleteTodo', index);
+            completeTodo(todo, index){
+                console.log(this.$store.state.editMode);
+                
+                if(!this.$store.state.editMode){
+                    this.completedTodo.todoId = index;
+                    this.completedTodo.todoTxt = todo;
+                    this.$emit('completeTodo', this.completedTodo);
+                } else {
+                    alert("Please Save Changes Before Doing That");
+                }
             }
         },
         directives: {
@@ -63,7 +72,7 @@
     }
     .animation-enter, .animation-leave-to {
         opacity: 0;
-        transform: translateY(400px)
+        transform: translateY(100px)
     }
     .animation-leave-active {
         position: absolute;
