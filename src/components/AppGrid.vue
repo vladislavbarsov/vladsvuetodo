@@ -40,9 +40,15 @@
                 editTodo.$emit('selectedTodo', this.selectedTodo);
             },
             completeTodo(todo, index){
-                this.completedTodo.todoId = index;
-                this.completedTodo.todoTxt = todo;
-                this.$emit('completeTodo', this.completedTodo);
+                console.log(this.$store.state.editMode);
+                
+                if(!this.$store.state.editMode){
+                    this.completedTodo.todoId = index;
+                    this.completedTodo.todoTxt = todo;
+                    this.$emit('completeTodo', this.completedTodo);
+                } else {
+                    alert("Please Save Changes Before Doing That");
+                }
             }
         },
         directives: {

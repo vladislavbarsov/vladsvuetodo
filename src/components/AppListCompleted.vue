@@ -35,9 +35,14 @@
         },
         methods:{
             restoreTodo(todo, index){
-                this.restoredTodo.todoId = index;
-                this.restoredTodo.todoTxt = todo;
-                this.$emit('restoreTodo', this.restoredTodo);
+                console.log(this.$store.state.editMode);
+                if(!this.$store.state.editMode){
+                    this.restoredTodo.todoId = index;
+                    this.restoredTodo.todoTxt = todo;
+                    this.$emit('restoreTodo', this.restoredTodo);
+                } else {
+                    alert("Please Save Changes Before Doing That");
+                }
             }
         }
     }
