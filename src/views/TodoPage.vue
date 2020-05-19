@@ -39,7 +39,11 @@
         },
         methods:{
             addTodo(todo){
-                this.todos.unshift(todo);
+                if(this.todos.indexOf(todo) == -1){
+                    this.todos.unshift(todo);
+                } else {
+                    alert("This Todo Already Exists");
+                }
             },
             saveChanges(todoToEdit){
                 this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
