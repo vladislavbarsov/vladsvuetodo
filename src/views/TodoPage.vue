@@ -39,22 +39,41 @@
         },
         methods:{
             addTodo(todo){
-                if(this.todos.indexOf(todo) == -1){
+                if(this.duplicateCheck(todo, this.todos)){
                     this.todos.unshift(todo);
                 } else {
-                    alert("This Todo Already Exists");
+                    alert("This todo already exists in the Active todo list")
                 }
             },
             saveChanges(todoToEdit){
-                this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
+                if(this.duplicateCheck(todoToEdit.todoTxt, this.todos)){
+                    this.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
+                } else {
+                    alert("This todo already exists in the Active todo list")
+                }
             },
             completeTodo(completedTodo){
+                if(this.duplicateCheck(completedTodo.todoTxt, this.completedTodos)){
+                    this.completedTodos.unshift(completedTodo.todoTxt);
+                } else {
+                    alert("This todo already exists in the Completed list")
+                }
                 this.todos.splice(completedTodo.todoId, 1);
-                this.completedTodos.unshift(completedTodo.todoTxt);
             },
             restoreTodo(restoredTodo){
+                if(this.duplicateCheck(restoredTodo.todoTxt, this.todos)){ 
+                    this.todos.unshift(restoredTodo.todoTxt);
+                } else {
+                    alert("This todo already exists in the Active todo list")
+                }
                 this.completedTodos.splice(restoredTodo.todoId, 1);
-                this.todos.unshift(restoredTodo.todoTxt);
+            },
+            duplicateCheck(todo, list){
+                if(list.indexOf(todo) == -1){
+                    return true
+                } else {
+                    return false
+                }
             }
         }
     }

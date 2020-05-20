@@ -40,8 +40,6 @@
                 editTodo.$emit('selectedTodo', this.selectedTodo);
             },
             completeTodo(todo, index){
-                console.log(this.$store.state.editMode);
-                
                 if(!this.$store.state.editMode){
                     this.completedTodo.todoId = index;
                     this.completedTodo.todoTxt = todo;

@@ -27,7 +27,6 @@
             createNew(){
                 if(this.todo != ''){
                   this.$emit('addTodo', this.todo);
-                  
                 } else {
                   alert("Please enter a todo")
                 }
@@ -39,15 +38,12 @@
               this.todoToEdit = {};
               this.$store.state.editMode = false;
               this.todo = "";
-              console.log(this.$store.state.editMode);
-              
             }
         },
         created(){
           editTodo.$on('selectedTodo', (todoObj)=>{
             this.todoToEdit = todoObj;
             this.todo = todoObj.todoTxt;
-            console.log("created hook");
             this.$store.state.editMode = true;
           })
         }

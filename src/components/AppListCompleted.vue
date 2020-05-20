@@ -35,7 +35,6 @@
         },
         methods:{
             restoreTodo(todo, index){
-                console.log(this.$store.state.editMode);
                 if(!this.$store.state.editMode){
                     this.restoredTodo.todoId = index;
                     this.restoredTodo.todoTxt = todo;
