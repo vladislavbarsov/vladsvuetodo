@@ -4,9 +4,11 @@
         <NewTodo @addTodo="addTodo"
                 @todoEdited="saveChanges"/> <hr>
         <Grid :allTodos="todos"
-                @completeTodo="completeTodo"/> <hr>
+                @completeTodo="completeTodo"
+                @deteleTodo="deleteTodo"/> <hr>
         <ListComplete :allCompleted="completedTodos"
-                @restoreTodo="restoreTodo"/> <hr>
+                @restoreTodo="restoreTodo"
+                @deteleTodo="deleteTodo"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -67,6 +69,14 @@
                     alert("This todo already exists in the Active todo list")
                 }
                 this.completedTodos.splice(restoredTodo.todoId, 1);
+            },
+            deleteTodo(todoToDelete){
+                if(todoToDelete.todoList == 'active'){
+                    this.todos.splice(todoToDelete.todoId, 1);
+                } else if(todoToDelete.todoList == 'completed') {
+                    this.completedTodos.splice(todoToDelete.todoId, 1);
+                }
+                
             },
             duplicateCheck(todo, list){
                 if(list.indexOf(todo) == -1){

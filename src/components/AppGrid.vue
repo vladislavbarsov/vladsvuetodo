@@ -8,11 +8,19 @@
                 <transition-group tag="span" name="animation">
                     <li class="note list-group-item animation-item list-group-item-success" 
                         v-for="(todo, index) in allTodos" 
-                        :key="todo"
-                        @click.prevent="selectTodo(todo, index)"
-                        v-long-press="300"
-                        @long-press-start="completeTodo(todo, index)">
-                        {{ todo }}
+                        :key="todo">
+                        <div class="row  d-flex justify-content-between">
+                            <div class="col-11"
+                                @click.prevent="selectTodo(todo, index)"
+                                v-long-press="300"
+                                @long-press-start="completeTodo(todo, index)">
+                                {{ todo }}
+                            </div>
+                            <div class="col text-right">
+                                <span class="border-0"
+                            @click.prevent="deleteTodo(todo, index)">X</span>
+                            </div>
+                        </div>
                     </li>
                 </transition-group>
             </ul>            
@@ -30,7 +38,8 @@
         data(){
             return {
                 selectedTodo: {},
-                completedTodo: {}
+                completedTodo: {},
+                todoToDelete: {}
             }
         },
         methods: {
@@ -47,6 +56,11 @@
                 } else {
                     alert("Please Save Changes Before Doing That");
                 }
+            },
+            deleteTodo(index){
+                this.todoToDelete.todoId = index;
+                this.todoToDelete.todoList = 'active'
+                this.$emit('deteleTodo', this.todoToDelete);
             }
         },
         directives: {

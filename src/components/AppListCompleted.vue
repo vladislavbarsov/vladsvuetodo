@@ -8,10 +8,19 @@
                 <transition-group tag="span" name="animation">
                     <li class="note list-group-item animation-item list-group-item-light"
                         v-for="(todo, index) in allCompleted"
-                        :key="todo"
-                        v-long-press="300"
-                        @long-press-start="restoreTodo(todo, index)"
-                        >{{ todo }}</li>
+                        :key="todo">
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-11"
+                                v-long-press="300"
+                                @long-press-start="restoreTodo(todo, index)">
+                                {{ todo }}
+                            </div>
+                            <div class="col text-right">
+                                <span class="border-0"
+                                @click.prevent="deleteTodo(todo, index)">X</span>
+                            </div>
+                        </div>
+                    </li>
                 </transition-group>
 
             </ul>
@@ -24,7 +33,8 @@
     export default {
         data(){
             return {
-                restoredTodo: {}
+                restoredTodo: {},
+                todoToDelete: {}
             }
         },
         props: [
@@ -42,6 +52,11 @@
                 } else {
                     alert("Please Save Changes Before Doing That");
                 }
+            },
+            deleteTodo(index){
+                this.todoToDelete.todoId = index;
+                this.todoToDelete.todoList = 'completed';
+                this.$emit('deteleTodo', this.todoToDelete);
             }
         }
     }
