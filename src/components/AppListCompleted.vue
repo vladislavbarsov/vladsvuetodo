@@ -4,9 +4,11 @@
             <h4>Completed To-do's</h4>
             <button type="button" 
                 class="btn btn-link text-success"
-                @click.prevent="clearList">Clear All</button>
+                @click.prevent="clearList"
+                v-if="!(Array.isArray(this.$store.state.completedTodos) && this.$store.state.completedTodos.length === 0)">Clear All</button>
         </div>
-        <div class="card">
+        <div class="card" 
+            v-if="!(Array.isArray(this.$store.state.completedTodos) && this.$store.state.completedTodos.length === 0)">
             <ul class="list-group list-group-flush">
                 <transition-group tag="span" name="animation">
                     <li class="note list-group-item animation-item list-group-item-light"
@@ -26,6 +28,10 @@
                     </li>
                 </transition-group>
             </ul>
+        </div>
+        <div class="card font-italic text-black-50 text-center border-0 h3 font-weight-lighter" 
+            v-else>
+            You have no compleated To-do's
         </div>
     </div>
 </template>

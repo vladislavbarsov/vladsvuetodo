@@ -3,7 +3,11 @@
         <div>
             <h4>Active To-do's</h4>
         </div>
-        <div class="card">
+        <div class="card font-italic text-black-50 text-center border-0 h3 font-weight-lighter" 
+            v-if="(Array.isArray(this.$store.state.todos) && this.$store.state.todos.length === 0)">
+            You have no active To-do's
+        </div>
+        <div class="card" v-else>
             <ul class="list-group list-group-flush">
                 <transition-group tag="span" name="animation">
                     <li class="note list-group-item animation-item list-group-item-success" 
@@ -24,7 +28,7 @@
                     </li>
                 </transition-group>
             </ul>            
-    </div>
+        </div>
     </div>
 </template>
 
