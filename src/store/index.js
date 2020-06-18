@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    editMode: false
+    editMode: false,
+    todos: ['Sample To-do'],
+    completedTodos: ['Completed To-do']
   }
 })
