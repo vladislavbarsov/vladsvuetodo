@@ -8,7 +8,8 @@
                 @deteleTodo="deleteTodo"/> <hr>
         <ListComplete :allCompleted="completedTodos"
                 @restoreTodo="restoreTodo"
-                @deteleTodo="deleteTodo"/> <hr>
+                @deteleTodo="deleteTodo"
+                @clearList="clearList"/> <hr>
         <Footer/>
     </div>
 </template>
@@ -76,7 +77,9 @@
                 } else if(todoToDelete.todoList == 'completed') {
                     this.completedTodos.splice(todoToDelete.todoId, 1);
                 }
-                
+            },
+            clearList(){
+                this.completedTodos = [];
             },
             duplicateCheck(todo, list){
                 if(list.indexOf(todo) == -1){

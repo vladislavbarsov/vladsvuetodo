@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div>
+        <div class="d-flex justify-content-between">
             <h4>Completed To-do's</h4>
+            <button type="button" 
+                class="btn btn-link text-success"
+                @click.prevent="clearList">Clear All</button>
         </div>
         <div class="card">
             <ul class="list-group list-group-flush">
@@ -22,7 +25,6 @@
                         </div>
                     </li>
                 </transition-group>
-
             </ul>
         </div>
     </div>
@@ -57,6 +59,9 @@
                 this.todoToDelete.todoId = index;
                 this.todoToDelete.todoList = 'completed';
                 this.$emit('deteleTodo', this.todoToDelete);
+            },
+            clearList(){
+                this.$emit('clearList', true);
             }
         }
     }
