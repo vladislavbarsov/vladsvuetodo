@@ -30,9 +30,18 @@
             Footer
         },
         methods:{
+            retrieveLS(){
+                this.$store.state.todos = JSON.parse(localStorage.getItem('activeTodoList'));
+                this.$store.state.completedTodos = JSON.parse(localStorage.getItem('completedTodoList'));
+            },
+            updateLS(){
+                localStorage.setItem('activeTodoList', JSON.stringify(this.$store.state.todos));
+                localStorage.setItem('completedTodoList', JSON.stringify(this.$store.state.completedTodos));
+            },
             addTodo(todo){
                 if(this.duplicateCheck(todo, this.$store.state.todos)){
                     this.$store.state.todos.unshift(todo);
+                    this.updateLS();
                 } else {
                     alert("This todo already exists in the Active todo list")
                 }
@@ -40,6 +49,7 @@
             saveChanges(todoToEdit){
                 if(this.duplicateCheck(todoToEdit.todoTxt, this.$store.state.todos)){
                     this.$store.state.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
+                    this.updateLS();
                 } else {
                     alert("This todo already exists in the Active todo list")
                 }
@@ -51,6 +61,7 @@
                     alert("This todo already exists in the Completed list")
                 }
                 this.$store.state.todos.splice(completedTodo.todoId, 1);
+                this.updateLS();
             },
             restoreTodo(restoredTodo){
                 if(this.duplicateCheck(restoredTodo.todoTxt, this.$store.state.todos)){ 
@@ -59,6 +70,7 @@
                     alert("This todo already exists in the Active todo list")
                 }
                 this.$store.state.completedTodos.splice(restoredTodo.todoId, 1);
+                this.updateLS();
             },
             deleteTodo(todoToDelete){
                 if(todoToDelete.todoList == 'active'){
@@ -66,9 +78,11 @@
                 } else if(todoToDelete.todoList == 'completed') {
                     this.$store.state.completedTodos.splice(todoToDelete.todoId, 1);
                 }
+                this.updateLS();
             },
             clearList(){
                 this.$store.state.completedTodos = [];
+                this.updateLS();
             },
             duplicateCheck(todo, list){
                 if(list.indexOf(todo) == -1){
@@ -77,6 +91,9 @@
                     return false
                 }
             }
+        },
+        created(){
+            this.retrieveLS();
         }
     }
 </script>
