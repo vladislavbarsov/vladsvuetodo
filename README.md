@@ -1,24 +1,21 @@
 # vladsvuetodo
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+A simple Todo app using VueJS and Bootstrap for styling.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+My goal was to implement all the gained knowledge of VueJS such as:
 
-### Lints and fixes files
-```
-npm run lint
-```
+* Vuex
+* Props
+* Event Bus
+* Global Event Bus
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+And to try and implement the following:
+
+* Simple Animation
+* Mobile friendly using Bootstrap 3
+* Local Storage
+* Long Press Directive
+
+And all of this to be pushed to Github using the Github for Desktop app.
