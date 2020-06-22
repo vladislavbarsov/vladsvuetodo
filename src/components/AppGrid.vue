@@ -4,7 +4,7 @@
             <h4>Active To-do's</h4>
         </div>
         <div class="card font-italic text-black-50 text-center border-0 h3 font-weight-lighter" 
-            v-if="(Array.isArray(this.$store.state.todos) && this.$store.state.todos.length === 0)">
+            v-if="(Array.isArray(this.$store.state.activeTodos) && this.$store.state.activeTodos.length === 0)">
             You have no active To-do's
         </div>
         <div class="card" v-else>

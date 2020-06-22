@@ -1,7 +1,7 @@
 <template class="row">
     <div>
       <div class="form-group">
-        <label v-if="!this.$store.state.editMode">Enter To-do</label>
+        <label v-if="!this.$store.state.editMode" class="h4">Enter To-do</label>
         <label v-else>Edit To-do</label>
         <textarea class="form-control" rows="5" v-model="todo"></textarea>
       </div>

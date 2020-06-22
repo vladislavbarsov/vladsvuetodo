@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <Header :todoCount="this.$store.state.todos.length"/> <hr>
+        <Header :todoCount="this.$store.state.activeTodos.length"/> <hr>
         <NewTodo @addTodo="addTodo"
                 @todoEdited="saveChanges"/> <hr>
-        <Grid :allTodos="this.$store.state.todos"
+        <Grid :allTodos="this.$store.state.activeTodos"
                 @completeTodo="completeTodo"
                 @deteleTodo="deleteTodo"/> <hr>
         <ListComplete :allCompleted="this.$store.state.completedTodos"
@@ -31,24 +31,24 @@
         },
         methods:{
             retrieveLS(){
-                this.$store.state.todos = JSON.parse(localStorage.getItem('activeTodoList'));
+                this.$store.state.activeTodos = JSON.parse(localStorage.getItem('activeTodoList'));
                 this.$store.state.completedTodos = JSON.parse(localStorage.getItem('completedTodoList'));
             },
             updateLS(){
-                localStorage.setItem('activeTodoList', JSON.stringify(this.$store.state.todos));
+                localStorage.setItem('activeTodoList', JSON.stringify(this.$store.state.activeTodos));
                 localStorage.setItem('completedTodoList', JSON.stringify(this.$store.state.completedTodos));
             },
             addTodo(todo){
-                if(this.duplicateCheck(todo, this.$store.state.todos)){
-                    this.$store.state.todos.unshift(todo);
+                if(this.duplicateCheck(todo, this.$store.state.activeTodos)){
+                    this.$store.state.activeTodos.unshift(todo);
                     this.updateLS();
                 } else {
                     alert("This todo already exists in the Active todo list")
                 }
             },
             saveChanges(todoToEdit){
-                if(this.duplicateCheck(todoToEdit.todoTxt, this.$store.state.todos)){
-                    this.$store.state.todos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
+                if(this.duplicateCheck(todoToEdit.todoTxt, this.$store.state.activeTodos)){
+                    this.$store.state.activeTodos.splice(todoToEdit.todoId, 1, todoToEdit.todoTxt);
                     this.updateLS();
                 } else {
                     alert("This todo already exists in the Active todo list")
@@ -60,12 +60,12 @@
                 } else {
                     alert("This todo already exists in the Completed list")
                 }
-                this.$store.state.todos.splice(completedTodo.todoId, 1);
+                this.$store.state.activeTodos.splice(completedTodo.todoId, 1);
                 this.updateLS();
             },
             restoreTodo(restoredTodo){
-                if(this.duplicateCheck(restoredTodo.todoTxt, this.$store.state.todos)){ 
-                    this.$store.state.todos.unshift(restoredTodo.todoTxt);
+                if(this.duplicateCheck(restoredTodo.todoTxt, this.$store.state.activeTodos)){ 
+                    this.$store.state.activeTodos.unshift(restoredTodo.todoTxt);
                 } else {
                     alert("This todo already exists in the Active todo list")
                 }
@@ -74,7 +74,7 @@
             },
             deleteTodo(todoToDelete){
                 if(todoToDelete.todoList == 'active'){
-                    this.$store.state.todos.splice(todoToDelete.todoId, 1);
+                    this.$store.state.activeTodos.splice(todoToDelete.todoId, 1);
                 } else if(todoToDelete.todoList == 'completed') {
                     this.$store.state.completedTodos.splice(todoToDelete.todoId, 1);
                 }
